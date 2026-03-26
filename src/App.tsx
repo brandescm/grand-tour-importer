@@ -98,7 +98,7 @@ const parseCSV = (text: string): ParsedRow[] => {
       lat, lon, region: get('region'),
       imageUrl: get('imageurl') || get('image_url') || get('imageUrl') || '',
       _needsGeocode: needsGeocode,
-      _geocodeStatus: needsGeocode ? 'pending' : 'skipped',
+      _geocodeStatus: (needsGeocode ? 'pending' : 'skipped') as ParsedRow['_geocodeStatus'],
       _rowIndex: idx,
     };
   }).filter(row => row.name);
@@ -298,8 +298,8 @@ function ImportTab() {
         <p className="card-title" style={{ marginBottom: '0.5rem' }}>Expected CSV columns (row 1 = header)</p>
         <p className="format-mono">name, city, address, lat, lon, region, imageUrl</p>
         <p className="format-info">
-          <code>lat</code> / <code>lon</code> / <code>imageUrl</code> can be empty.&nbsp;
-          <code>distance</code> is calculated automatically by the app.
+          <strong>lat</strong> / <strong>lon</strong> / <strong>imageUrl</strong> can be empty.&nbsp;
+          <strong>distance</strong> is calculated automatically by the app.
         </p>
         <button className="btn-ghost mt-sm" onClick={() => downloadFile(SAMPLE_CSV, 'sample_stops.csv', 'text/csv')}>
           <Download size={14} /> Download Sample CSV
@@ -677,7 +677,7 @@ export default function ImportStops() {
         <div className="importer-header">
           <h1 className="importer-title">Tour Stop Importer</h1>
           <p className="importer-subtitle">
-            Generate <code>tourStops.ts</code> and <code>cityCoordinates.ts</code> files for your app.
+            Generate <strong>tourStops.ts</strong> and <strong>cityCoordinates.ts</strong> files for your app.
           </p>
         </div>
 
